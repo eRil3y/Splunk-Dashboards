@@ -1,0 +1,31 @@
+<form theme="dark">
+  <label>Firepower Intrusion Events</label>
+  <description>Intrusion Events sorted by count</description>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="time" token="field1">
+      <label></label>
+      <default>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <title>Firepower Intrusion Events</title>
+      <table>
+        <title>Sorted by Count</title>
+        <search>
+          <query>sourcetype="cisco:estreamer:data" 
+| stats count by msg
+| sort - count</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+        </search>
+        <option name="count">20</option>
+        <option name="drilldown">cell</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+  </row>
+</form>
